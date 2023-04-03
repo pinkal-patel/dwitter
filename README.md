@@ -78,5 +78,3 @@ JWT_REFRESH_SECRET_EXP=1d
 
 
 Please find API samples with sample request and response at API_sample_req_res.txt
-
-
