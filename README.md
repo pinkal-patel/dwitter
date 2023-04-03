@@ -59,11 +59,11 @@ following are the Collections along with their respective fields
 
 
 Notes:
-JWT token is used for sign up and login
-All listing APIs are having pagination and querying support
-Rate Limiting for login API that will allow max 5 attempts for login in 15 mins from a perticular IP
-Redis (caching database) is used for Rate Limiting
-Refresh Token feature is implemented to generate the new access token
+JWT token is used for sign up and login.
+All listing APIs are having pagination and querying support.
+Rate Limiting for login API that will allow max 5 attempts for login in 15 mins from a perticular IP.
+Redis (caching database) is used for Rate Limiting.
+Refresh Token feature is implemented to generate the new access token.
 
 
 Below Envs will be needed to run the application :
