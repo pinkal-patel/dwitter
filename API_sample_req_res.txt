@@ -1,0 +1,508 @@
+------------------------------------------------------------ APIS ----------------------------------------------------------------------------
+
+
+------------------------------------------------------ 1. Register User ------------------------------------------
+Url : http://localhost:9002/user/register
+Method : POST
+Req payload : {
+    "userName": "xyz",
+    "email": "xyz@gmail.com",
+    "role":"admin",
+    "password": "xyz123"
+}
+
+possible sample resp : 
+
+1. {
+    "_id": "642a7cca1243f4dd831a8b36",
+    "userName": "xyz",
+    "email": "xyz@gmail.com",
+    "role": "admin",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+    "createdAt": "2023-04-03T07:14:18.694Z",
+    "updatedAt": "2023-04-03T07:14:18.694Z",
+    "__v": 0
+}
+
+2. {
+    "message": "user already exists"
+}
+
+------------------------------------------------------------2. Login -----------------------------------------------------
+Url : http://localhost:9002/user/sign_in
+Method : POST
+Req payload : {
+    "email": "xyz@gmail.com",
+    "password": "xyz123"
+}
+
+possible sample resp : 
+
+1. {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJ1c2VyTmFtZSI6Inh5eiIsInVzZXJJZCI6IjcwOTllYzBkLWM0N2YtNDkyNS04MmMyLWMwYjE4YmIyNjU2ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MDUwNjE0OSwiZXhwIjoxNjgwNTA5NzQ5fQ.wqQ7Hk8xTgzDiYSm0tORubdX1OrxAJWju9oxqdFJ-dQ",
+    
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJ1c2VyTmFtZSI6Inh5eiIsInVzZXJJZCI6IjcwOTllYzBkLWM0N2YtNDkyNS04MmMyLWMwYjE4YmIyNjU2ZCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4MDUwNjE0OSwiZXhwIjoxNjgwNTkyNTQ5fQ.fDMHcINtcY_FnILG4P1ve4OyFsO7E5TO1G5t4qY9wE8"
+}
+
+2. {
+    "message": "Authentication failed. Invalid user or password."
+}
+
+-------------------------------------- 3. Logout --------------------------------------------------------
+Url : http://localhost:9002/user/logout
+Method : GET
+Req payload :{ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJfaWQiOiI2NDI4NzYyYzRiNmQzY2U0MTczODc1YWMiLCJ1c2VySWQiOiJjZDE1MGEzMi05NDAzLTQ5MzktODc0Yy04NWFhMTg4ZjJiZTUiLCJpYXQiOjE2ODA0NjMxOTYsImV4cCI6MTY4MDU0OTU5Nn0.wM0HLkFAs8zvHO8LTOggnaOyJ8gcwW_1HaGZqX_ssKQ"}
+
+possible sample resp : 
+1. {
+    "message": "Logged out successfully..."
+}
+
+------------------------------------------ 4. Generate new token ----------------------------------------------
+Url : http://localhost:9002/token
+Method : POST
+Req payload :{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inh5ekBnbWFpbC5jb20iLCJfaWQiOiI2NDI4NzYyYzRiNmQzY2U0MTczODc1YWMiLCJ1c2VySWQiOiJjZDE1MGEzMi05NDAzLTQ5MzktODc0Yy04NWFhMTg4ZjJiZTUiLCJpYXQiOjE2ODA0NjAzODcsImV4cCI6MTY4MDU0Njc4N30.bj334wkEG__f_Z2tfUyvniTXAQBDpmRk-6b5h5RWqLE"
+}
+
+possible sample resp : 
+1. {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BnbWFpbC5jb20iLCJ1c2VyTmFtZSI6ImFiYyIsInVzZXJJZCI6IjdjOWQ1YWQxLWIyNTQtNGJmOC1iMTMxLTgzN2QxZDg4NGZjMiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjgwNTEzMjY3LCJleHAiOjE2ODA1MTY4Njd9.jd2MtyVdejtWsQOK-YpUg-yC_k61c5hhsDQjQNcNVUU"
+}
+
+
+----------------------------------------------------5.  Create Todo --------------------------------------------------
+Url : http://localhost:9002/todo/create
+Method : POST
+Req payload :{
+    "title":"",
+    "status":""  // optional
+}
+
+possible sample resp : 
+1. {
+    "status": "pending",
+    "isDeleted": false,
+    "_id": "642a7df04451b9ddc54c5868",
+    "title": "Check emails at 2",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+    "todoId": "c4d262df-4764-4fd2-a78a-263c5ec1bbad",
+    "createdAt": "2023-04-03T07:19:12.604Z",
+    "updatedAt": "2023-04-03T07:19:12.604Z",
+    "__v": 0
+}
+
+------------------------------------------------------- 6. Fetch Todo -------------------------------------------------------
+Url : http://localhost:9002/todo/list
+Method: POST
+Req payload :{
+   "page" : 1,  // optional
+    "limit" : 10 , // optional
+    "sort" :{ createAt : -1}, // optional
+    "filter" : { "status" :"pending" } // optional
+}
+all fields are optional 
+
+
+possible sample resp : 
+1. {
+    "docs": [
+        {
+            "status": "pending",
+            "_id": "642a7dba4451b9ddc54c5866",
+            "title": "complele the assignment before 5",
+            "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "todoId": "b003bd3b-3b51-401f-a3cf-f25c1319d2b7",
+            "createdAt": "2023-04-03T07:18:18.742Z",
+            "updatedAt": "2023-04-03T07:18:18.742Z"
+        }
+    ],
+    "total": 2,
+    "limit": 1,
+    "page": 1,
+    "pages": 2
+}
+
+-------------------------------------------------------7. Get Todo Details ----------------------------------------------------
+Url : http://localhost:9002/todo/{todoId}
+Method: GET
+
+possible sample resp : 
+ 1. {
+    "_id": "642a7dba4451b9ddc54c5866",
+    "status": "pending",
+    "isDeleted": false,
+    "title": "complele the assignment before 5",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+    "todoId": "b003bd3b-3b51-401f-a3cf-f25c1319d2b7",
+    "createdAt": "2023-04-03T07:18:18.742Z",
+    "updatedAt": "2023-04-03T07:18:18.742Z",
+    "__v": 0
+}
+
+------------------------------------------------------- 8. Edit Todo Details -----------------------------------------------------
+Url : http://localhost:9002/todo/{todoId}/edit
+Method: POST
+Req payload :{
+   "status":"", // optional
+    "title":"" // optional
+}
+
+possible sample resp : 
+1. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+2. {
+    "message": "No Changes found"
+}
+
+3. {
+    "message": "status must be valid"
+}
+--------------------------------------------------------9. Delete Todo ---------------------------------------------------------
+Url : http://localhost:9002/todo/{todoId}/delete
+Method: GET
+
+possible sample resp : 
+1. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+---------------------------------------------------- 10. Create Post --------------------------------------------------
+Url : http://localhost:9002/post/create
+Method : POST
+Req payload :{
+    "title":"",
+    "body":""
+}
+
+possible sample resp : 
+
+1. {
+    "message": "Unauthorized! Access Token was expired!"
+}
+
+2. {
+    "message": "Posts validation failed: body: Cast to String failed for value \"123\" (type number) at path \"body\""
+}
+
+3. {
+    "title": "My Fifth Post",
+    "body": "This is my Fifth post on dwitter",
+    "postId": "110f927e-2faa-402c-b6cc-fee4b0fb4074",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d"
+}
+
+------------------------------------------------------- 11. Fetch Posts -------------------------------------------------------
+Url : http://localhost:9002/post/list
+Method: POST
+Req payload :{
+   "page" : 1, // optional
+    "limit" : 10 , // optional
+    "sort" :{ createAt : -1}, // optional
+    "filter" : { "userId" :"" } // optional
+}
+all fields are optional 
+
+possible sample resp :  
+1. {
+    "docs": [
+        {
+            "_id": "642a90353a29f1dec53f2928",
+            "title": "My First Post",
+            "body": "This is my first post on dwitter",
+            "postId": "e7595508-da89-4d7f-8576-f9adb2bac1bd",
+            "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "createdAt": "2023-04-03T08:37:09.361Z",
+            "updatedAt": "2023-04-03T08:37:09.361Z"
+        },
+        {
+            "_id": "642a90513a29f1dec53f292a",
+            "title": "My Second Post",
+            "body": "This is my second post on dwitter",
+            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+            "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "createdAt": "2023-04-03T08:37:37.034Z",
+            "updatedAt": "2023-04-03T08:37:37.034Z"
+        }
+    ],
+    "total": 4,
+    "limit": 2,
+    "page": 1,
+    "pages": 2
+}
+
+
+
+-------------------------------------------------------12. Get Post Details ----------------------------------------------------
+Url : http://localhost:9002/post/{postId}
+Method: GET
+
+possible sample resp : 
+
+1. {
+    "_id": "642a90513a29f1dec53f292a",
+    "isDeleted": false,
+    "title": "My Second Post",
+    "body": "This is my second post on dwitter",
+    "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+    "createdAt": "2023-04-03T08:37:37.034Z",
+    "updatedAt": "2023-04-03T08:37:37.034Z",
+    "__v": 0
+}
+
+
+-------------------------------------------------------13. Edit Post Details -----------------------------------------------------
+Url : http://localhost:9002/post/{postId}/edit
+Method: POST
+Req payload :{
+   "body":"", // optional
+    "title":"" // optional
+}
+
+possible sample resp : 
+1. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+--------------------------------------------------------14. Delete Post ---------------------------------------------------------
+Url : http://localhost:9002/post/{postId}/delete
+Method: GET
+
+possible sample resp : 
+1. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+---------------------------------------------------- 15. Create Comment --------------------------------------------------
+Url : http://localhost:9002/{postId}/comment/create
+Method : POST
+Req payload :{
+    "body":""
+}
+
+possible sample resp : 
+1. {
+    "body": "Congratulations !!",
+    "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+    "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+    "name": "xyz",
+    "commentId": "f23dcf30-7a51-4318-879a-4f434d28b293"
+}
+
+
+
+-------------------------------------------------------16. Fetch Comments -------------------------------------------------------
+Url : http://localhost:9002/{postId}/comment/list
+Method: POST
+Req payload :{
+   "page" : 1, // optional
+    "limit" : 10 , // optional
+    "sort" :{ createAt : -1}, // optional
+    "filter" : { "name" :"xyz" } // optional
+}
+all fields are optional 
+
+possible sample resp : 
+1. {
+    "docs": [
+        {
+            "_id": "642a91ff3a29f1dec53f293e",
+            "body": "Congratulations !!",
+            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+            userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "name": "xyz",
+            "commentId": "f23dcf30-7a51-4318-879a-4f434d28b293",
+            "createdAt": "2023-04-03T08:44:47.769Z",
+            "updatedAt": "2023-04-03T08:44:47.769Z"
+        },
+        {
+            "_id": "642a92563a29f1dec53f2940",
+            "body": "Welcome to dwitter !!",
+            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+            userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "name": "xyz",
+            "commentId": "cbe6c620-8895-4f8f-8adf-bf43bbd064cc",
+            "createdAt": "2023-04-03T08:46:14.380Z",
+            "updatedAt": "2023-04-03T08:46:14.380Z"
+        },
+        {
+            "_id": "642a92713a29f1dec53f2942",
+            "body": "Hey !!",
+            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+            userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "name": "xyz",
+            "commentId": "0e5a4793-99ad-4914-b11a-242ff186cbbb",
+            "createdAt": "2023-04-03T08:46:41.858Z",
+            "updatedAt": "2023-04-03T08:46:41.858Z"
+        }
+    ],
+    "total": 3,
+    "pages": 1
+}
+
+-------------------------------------------------------17. Edit Comment Details -----------------------------------------------------
+Url : http://localhost:9002/comment/{commentId}/edit
+Method: POST
+Req payload :{
+   "body":""
+}
+
+possible sample resp : 
+1. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+
+
+--------------------------------------------------------18. Delete Comment ---------------------------------------------------------
+Url : http://localhost:9002/comment/{commentId}/delete
+Method: GET
+
+1. possible sample resp : 
+{
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
+
+------------------------------------------------------ 19. User profile List --------------------------------------------------------
+Url : http://localhost:9002/user/list
+Method: POST
+Req payload :{
+   "page" : 1, // optional
+    "limit" : 10 , // optional
+    "sort" :{ createAt : -1}, // optional
+    "filter" : { "userName" :"" } // optional
+}
+all fields are optional 
+
+possible sample resp : 
+1. {
+    "data": [
+        {
+            "_id": "642a956857f803e98ba7873f",
+            "userId": "7c9d5ad1-b254-4bf8-b131-837d1d884fc2",
+            "userName": "abc",
+            "email": "abc@gmail.com",
+            "todos": [],
+            "posts": [
+                {
+                    "_id": "642a960e57f803e98ba78745",
+                    "title": "Alert Alert Alert",
+                    "body": "Please be careful while making payments",
+                    "postId": "a142e30c-94a8-446f-8ab5-05168c9b8983",
+                    "createdAt": "2023-04-03T09:02:06.214Z",
+                    "comments": [
+                        {
+                            "_id": "642a9673e0050cea498c0705",
+                            "body": "Yes, sure",
+                            "postId": "a142e30c-94a8-446f-8ab5-05168c9b8983",
+                            "userId": "7c9d5ad1-b254-4bf8-b131-837d1d884fc2"
+                            "name": "abc",
+                            "commentId": "c1993a86-4190-4aab-8796-899f720475a3",
+                            "createdAt": "2023-04-03T09:03:47.024Z"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "_id": "642a7cca1243f4dd831a8b36",
+            "userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+            "userName": "xyz",
+            "email": "xyz@gmail.com",
+            "todos": [
+                {
+                    "_id": "642a7dba4451b9ddc54c5866",
+                    "status": "inprocess",
+                    "title": "complele the assignment before 5",
+                    "todoId": "b003bd3b-3b51-401f-a3cf-f25c1319d2b7"
+                },
+                {
+                    "_id": "642a7df04451b9ddc54c5868",
+                    "status": "pending",
+                    "title": "Check emails at 2",
+                    "todoId": "c4d262df-4764-4fd2-a78a-263c5ec1bbad"
+                }
+            ],
+            "posts": [
+                {
+                    "_id": "642a90353a29f1dec53f2928",
+                    "title": "My First Post",
+                    "body": "This is my first post on dwitter",
+                    "postId": "e7595508-da89-4d7f-8576-f9adb2bac1bd",
+                    "createdAt": "2023-04-03T08:37:09.361Z",
+                    "comments": []
+                },
+                {
+                    "_id": "642a90513a29f1dec53f292a",
+                    "title": "My Second Post",
+                    "body": "This is my 2nd post on dwitter",
+                    "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+                    "createdAt": "2023-04-03T08:37:37.034Z",
+                    "comments": [
+                        {
+                            "_id": "642a91ff3a29f1dec53f293e",
+                            "body": "Congratulations !!",
+                            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+                            userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+                            "name": "xyz",
+                            "commentId": "f23dcf30-7a51-4318-879a-4f434d28b293",
+                            "createdAt": "2023-04-03T08:44:47.769Z"
+                        },
+                        {
+                            "_id": "642a92563a29f1dec53f2940",
+                            "body": "Welcome to dwitter !!",
+                            "postId": "0827f750-ce46-4c1c-941c-8198778d204c",
+                            userId": "7099ec0d-c47f-4925-82c2-c0b18bb2656d",
+                            "name": "xyz",
+                            "commentId": "cbe6c620-8895-4f8f-8adf-bf43bbd064cc",
+                            "createdAt": "2023-04-03T08:46:14.380Z"
+                        }
+                    ]
+                },
+                {
+                    "_id": "642a905d3a29f1dec53f292c",
+                    "title": "My Third Post",
+                    "body": "This is my third post on dwitter",
+                    "postId": "1e77e807-e1f3-466e-8153-216942c1c828",
+                    "createdAt": "2023-04-03T08:37:49.143Z",
+                    "comments": []
+                }
+            ]
+        }
+    ],
+    "page": 1,
+    "limit": 10
+}
+
+------------------------------------------------------20. Edit user --------------------------------------------------------------
+Url : http://localhost:9002/user/{userId}/edit
+Method: POST
+Req payload :{
+   "role":"", 
+   "userName" : ""
+}
+
+possible sample resp : 
+1. {
+    "message": "not authorized to upate the user details of other users"
+}
+
+2. {
+    "n": 1,
+    "nModified": 1,
+    "ok": 1
+}
